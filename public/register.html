@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register Form</title>
+</head>
+<body>
+  <h1>Register Form</h1>
+  <form id="registerForm">
+    <input type="text" id="name" name="name" placeholder="Name" required /><br><br>
+    <input type="email" id="email" name="email" placeholder="Email" required /><br><br>
+    <textarea id="message" name="message" placeholder="Your message"></textarea><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+      };
+
+      fetch('http://localhost:5000/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(response => {
+        alert(response.message);
+        console.log(response);
+      })
+      .catch(error => {
+        alert("Error saving data!");
+        console.error('❌ Error:', error);
+      });
+    });
+  </script>
+</body>
+</html>
