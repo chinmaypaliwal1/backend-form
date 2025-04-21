@@ -25,15 +25,17 @@ app.get('/', (req, res) => {
 // Your POST route for form submission
 const FormData = require('./models/FormData');
 app.post('/submit-form', async (req, res) => {
-    console.log('BODY:', req.body);
-  try {
-    const formData = new FormData(req.body);
-    await formData.save();
-    res.status(201).json({ message: 'Form data saved successfully ✅' });
-  } catch (err) {
-    res.status(500).json({ error: 'Something went wrong ❌' });
-  }
-});
+    try {
+      console.log("✅ Request body:", req.body); // Log incoming data
+      const formData = new FormData(req.body);
+      await formData.save();
+      res.status(201).json({ message: 'Form data saved successfully ✅' });
+    } catch (err) {
+      console.error("❌ Server error:", err); // Log the exact error
+      res.status(500).json({ error: 'Something went wrong ❌' });
+    }
+  });
+  
 
 const PORT = 5000;
 app.listen(PORT, () => {
