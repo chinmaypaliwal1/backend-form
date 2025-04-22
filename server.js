@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const path = require('path'); // Add this
 const app = express();
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(express.static(path.join(__dirname, 'public'))); // This tells Express to serve static files from 'public' folder
 app.use(express.json());                                 // parse JSON bodies
 app.use(express.urlencoded({ extended: true }));         // parse <form> bodies
