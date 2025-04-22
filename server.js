@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 
 // Your POST route for form submission
 const FormData = require('./models/FormData');
-app.post('https://backend-form-2r24.onrender.com/submit-form', async (req, res) => {
+app.post('submit-form', async (req, res) => {
     try {
       console.log("✅ Request body:", req.body); // Log incoming data
       const formData = new FormData(req.body);
